@@ -20,8 +20,39 @@ function dijkstraCellCompare(cellA, cellB) {
 }
 
 function aStar() {
-  // TODO: implement this
-  alert('A* not implemented yet');
+  precomputeEstimatedDistToEnd();
+
+  const start = world.board.getCell(world.config.start.row, world.config.start.col);
+
+  start.parent = undefined;
+  start.distFromStart = 0;
+  const cellsPriorityQueue = [start];
+
+  // Note this is a suboptimal priority queue implementation
+  cellsPriorityQueue.remove = () => {
+    cellsPriorityQueue.sort(aStarCellCompare);
+    return cellsPriorityQueue.shift();
+  };
+
+  priorityQueueTraverse(cellsPriorityQueue);
+}
+
+function aStarCellCompare(cellA, cellB) {
+  return (cellA.distFromStart + cellA.estimatedDistToEnd)
+    - (cellB.distFromStart + cellB.estimatedDistToEnd);
+}
+
+function precomputeEstimatedDistToEnd() {
+  const end = world.board.getCell(world.config.end.row, world.config.end.col);
+
+  for (let i = 0; i < world.board.rows; i++) {
+    for (let j = 0; j < world.board.cols; j++) {
+      const cell = world.board.getCell(i, j);
+
+      // Straight-line distance
+      cell.estimatedDistToEnd = Math.hypot(cell.row - end.row, cell.col - end.col);
+    }
+  }
 }
 
 function priorityQueueTraverse(cellsToVisit) {
