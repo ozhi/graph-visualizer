@@ -58,8 +58,10 @@ function drawCell(cell) {
 }
 
 function getColorByDistance(cell) {
-  const startToEndDist = Math.hypot(world.config.start.row - world.config.end.row, world.config.start.col - world.config.end.col);
-  const maxDist = Math.hypot(world.config.rows, world.config.cols);
+  const startToEndDist =
+    Math.hypot(world.config.start.row - world.config.end.row, world.config.start.col - world.config.end.col);
+
+    const maxDist = Math.hypot(world.config.rows, world.config.cols);
   const cellToEndDist = Math.hypot(cell.row - world.config.end.row, cell.col - world.config.end.col);
   const coef = cellToEndDist / maxDist;
 

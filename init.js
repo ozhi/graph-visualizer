@@ -14,8 +14,8 @@ $(document).ready(() => {
     rows: 30,
     cols: 30,
     start: { row: 0, col: 0 },
-    end: { row: 15, col: 25 },
-    stepWait: 1
+    end: { row: 25, col: 15 },
+    stepWait: 50
   };
 
   console.log('Document ready. Initializing world...');
