@@ -9,7 +9,7 @@ function dfs() {
 
   cellsStack.remove = cellsStack.pop;
 
-  traverse(cellsStack);
+  priorityQueueTraverse(cellsStack);
 }
 
 function bfs() {
@@ -21,10 +21,10 @@ function bfs() {
 
   cellsQueue.remove = cellsQueue.shift;
 
-  traverse(cellsQueue);
+  priorityQueueTraverse(cellsQueue);
 }
 
-function traverse(cellsToVisit) {
+function priorityQueueTraverse(cellsToVisit) {
   if (cellsToVisit.length === 0 || world.board.endReached) {
     return;
   }
@@ -53,6 +53,6 @@ function traverse(cellsToVisit) {
   }
 
   setTimeout(() => {
-    traverse(cellsToVisit);
+    priorityQueueTraverse(cellsToVisit);
   }, world.config.stepWait);
 }
