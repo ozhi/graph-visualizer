@@ -1,7 +1,15 @@
 'use strict';
 
 function dfs() {
-  alert('Depth-first search not implemented yet');
+  const start = world.board.getCell(world.config.start.row, world.config.start.col);
+
+  start.parent = undefined;
+  start.distFromStart = 0;
+  const cellsStack = [start];
+
+  cellsStack.remove = cellsStack.pop;
+
+  traverse(cellsStack);
 }
 
 function bfs() {
@@ -11,6 +19,8 @@ function bfs() {
   start.distFromStart = 0;
   const cellsQueue = [start];
 
+  cellsQueue.remove = cellsQueue.shift;
+
   traverse(cellsQueue);
 }
 
@@ -19,7 +29,7 @@ function traverse(cellsToVisit) {
     return;
   }
 
-  const cell = cellsToVisit.shift();
+  const cell = cellsToVisit.remove();
 
   console.log('Visiting (%d, %d)', cell.row, cell.col);
   cell.status = CellStatus.CLOSED;
