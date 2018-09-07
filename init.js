@@ -1,5 +1,3 @@
-'use strict';
-
 // TODO: make algorithms pausable
 
 const world = {
@@ -32,6 +30,7 @@ $(document).ready(() => {
     world.ctx.clearRect(0, 0, world.canvas.width, world.canvas.height);
     drawBoard();
   }, 1000 / 60); // draw 60 fps
+  console.log("ready");
 });
 
 function applyConfig() {
@@ -80,10 +79,10 @@ function setupEventListeners() {
 
 function canvasMouseMoveListener(mouseEvent) {
   const cell = getCellFromMouseEvent(mouseEvent);
-  document.getElementById('info-row').textContent = cell.row;
-  document.getElementById('info-col').textContent = cell.col;
-  document.getElementById('info-status').textContent = cell.status;
-  document.getElementById('info-dist-from-start').textContent = cell.distFromStart;
+  // document.getElementById('info-row').textContent = cell.row;
+  // document.getElementById('info-col').textContent = cell.col;
+  // document.getElementById('info-status').textContent = cell.status;
+  // document.getElementById('info-dist-from-start').textContent = cell.distFromStart;
 }
 
 function canvasMouseDownListener(mouseEvent) {

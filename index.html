@@ -1,31 +1,29 @@
-<html>
+<!doctype html>
+
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
   <title>Graph visualizer</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style.css">
 
-  <script src="init.js"></script>
   <script src="cell.js"></script>
   <script src="board.js"></script>
-
+  <script src="init.js"></script>
+  
   <script src="gen-maze.js"></script>
-
-  <script src="traverse.js"></script>
+  
+  <script src="queue.js"></script>
+  <script src="priority-queue.js"></script>
+  <script src="stack.js"></script>
   <script src="priority-queue-traverse.js"></script>
+  <script src="traverse.js"></script>
 </head>
 
 <body>
 
   <canvas id="canvas"></canvas>
-
-  <div id="info" class="box">
-    Row: <span id="info-row"></span> <br>
-    Col: <span id="info-col"></span> <br>
-    Status: <span id="info-status"></span> <br>
-    Dist from start: <span id="info-dist-from-start"></span>
-  </div>
 
   <div id="buttons" class="box">
     <button id="btn-reset-board">Reset board</button> <br>

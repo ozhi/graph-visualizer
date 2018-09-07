@@ -18,6 +18,7 @@ class Board {
   }
 
   getCell(row, col) {
+    //console.log("getting cell: "+ [row, col]);
     return this.board[row][col];
   }
 }
@@ -52,8 +53,17 @@ function getNeighbors(cell) {
 }
 
 function isValidCell(row, col) {
-  return 0 <= row && row < world.board.rows &&
-    0 <= col && col < world.board.cols;
+  return 0 <= row && row < world.board.rows && 0 <= col && col < world.board.cols;
+}
+
+function canEnterCell(row, col){
+  let value;
+  if(!isValidCell(row, col))value= false;
+  else if(row == world.config.end.row && col == world.config.end.col)value=true;
+  else if(world.board.getCell(row, col).status!=CellStatus.UNREACHED)value= false;
+  else value= true;
+  //console.log("" + [row, col] + value);
+  return value;
 }
 
 function resetBoard() {
@@ -67,8 +77,18 @@ function colorFoundWay(cell) {
   }
 
   cell.status = CellStatus.MARKED;
+  console.log("coloring: " + [cell.row, cell.col]);
 
   if (cell.parent) {
     setTimeout(() => colorFoundWay(cell.parent), world.config.stepWait);
   }
+}
+
+function markParent(x, y, pX, pY){
+  world.board.getCell(x, y).parent = world.board.getCell(pX, pY);
+}
+
+function colorFoundWayXY(row, col){
+  let cell = world.board.getCell(row, col);
+  colorFoundWay(cell);
 }

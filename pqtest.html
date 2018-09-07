@@ -1,0 +1,31 @@
+<script src="priority-queue.js"></script>
+
+<script>
+class TestItem extends PriorityQueueItem{
+    constructor(priority){
+        super();
+        this.priority=priority;
+    }
+
+    getPriority(){return this.priority;}
+}
+
+let queue = new PriorityQueue();
+queue.push(new TestItem(7));
+queue.push(new TestItem(1));
+queue.push(new TestItem(44));
+queue.push(new TestItem(445));
+queue.push(new TestItem(3));
+queue.push(new TestItem(1));
+queue.push(new TestItem(9));
+queue.push(new TestItem(1));
+queue.push(new TestItem(6));
+
+while(queue.any())
+{
+    console.log(queue.peek());
+    queue.pop();
+}
+
+
+</script>
