@@ -9,7 +9,7 @@ function dfs() {
 
   cellsStack.remove = cellsStack.pop;
 
-  priorityQueueTraverse(cellsStack);
+  traverse(cellsStack);
 }
 
 function bfs() {
@@ -21,10 +21,10 @@ function bfs() {
 
   cellsQueue.remove = cellsQueue.shift;
 
-  priorityQueueTraverse(cellsQueue);
+  traverse(cellsQueue);
 }
 
-function priorityQueueTraverse(cellsToVisit) {
+function traverse(cellsToVisit) {
   if (cellsToVisit.length === 0 || world.board.endReached) {
     return;
   }
@@ -46,13 +46,13 @@ function priorityQueueTraverse(cellsToVisit) {
     const neighbor = neighbors[i];
     if (neighbor.status === CellStatus.UNREACHED) {
       cellsToVisit.push(neighbor);
-      neighbor.status = CellStatus.OPEN;
+      // neighbor.status = CellStatus.OPEN;
       neighbor.parent = cell;
       neighbor.distFromStart = cell.distFromStart + 1;
     }
   }
 
   setTimeout(() => {
-    priorityQueueTraverse(cellsToVisit);
+    traverse(cellsToVisit);
   }, world.config.stepWait);
 }

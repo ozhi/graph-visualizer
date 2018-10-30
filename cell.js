@@ -15,34 +15,34 @@ class Cell {
   constructor(row, col) {
     this.row = row;
     this.col = col;
-    this.status = CellStatus.UNREACHED;
-
-    this.distFromStart = undefined;
-    this.estimatedDistToEnd = undefined;
-    this.parent = undefined;
+    this.clear();
   }
 }
 
-function isStart(cell) {
-  return cell.row === world.config.start.row && cell.col === world.config.start.col;
+Cell.prototype.clear = function() {
+  this.status = CellStatus.UNREACHED;
+
+  this.distFromStart = undefined;
+  this.estimatedDistToEnd = undefined;
+  this.parent = undefined;
 }
 
-function drawCell(cell) {
+Cell.prototype.draw = function() {
   let color;
 
-  if (cell.row === world.config.start.row && cell.col === world.config.start.col) {
+  if (this.row === world.config.start.row && this.col === world.config.start.col) {
     color = '#FF0000'; // start is red
-  } else if (cell.row === world.config.end.row && cell.col === world.config.end.col) {
+  } else if (this.row === world.config.end.row && this.col === world.config.end.col) {
     color = '#00FF00'; // end is green
-  } else if (cell.status === CellStatus.WALL) {
+  } else if (this.status === CellStatus.WALL) {
     color = 'Black';
-  } else if (cell.status === CellStatus.UNREACHED) {
+  } else if (this.status === CellStatus.UNREACHED) {
     color = 'LightGrey';
-  } else if (cell.status === CellStatus.OPEN) {
+  } else if (this.status === CellStatus.OPEN) {
     color = 'Orange';
-  } else if (cell.status === CellStatus.CLOSED) {
-    color = getColorByDistance(cell);
-  } else if (cell.status === CellStatus.MARKED) {
+  } else if (this.status === CellStatus.CLOSED) {
+    color = getColorByDistance(this);
+  } else if (this.status === CellStatus.MARKED) {
     color = 'Blue';
   }
 
@@ -50,11 +50,15 @@ function drawCell(cell) {
 
   world.ctx.beginPath();
   world.ctx.fillRect(
-    cell.col * CELL_WIDTH + 1,
-    cell.row * CELL_HEIGHT + 1,
+    this.col * CELL_WIDTH + 1,
+    this.row * CELL_HEIGHT + 1,
     CELL_WIDTH - 2,
     CELL_HEIGHT - 2);
   world.ctx.fill();
+}
+
+function isStart(cell) {
+  return cell.row === world.config.start.row && cell.col === world.config.start.col;
 }
 
 function getColorByDistance(cell) {

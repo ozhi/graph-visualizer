@@ -30,7 +30,7 @@ $(document).ready(() => {
 
   setInterval(() => {
     world.ctx.clearRect(0, 0, world.canvas.width, world.canvas.height);
-    drawBoard();
+    world.board.draw();
   }, 1000 / 60); // draw 60 fps
 });
 
@@ -72,6 +72,7 @@ function setupEventListeners() {
   document.getElementById('btn-gen-maze').addEventListener('click', generateMaze, false);
   document.getElementById('btn-dfs').addEventListener('click', dfs, false);
   document.getElementById('btn-bfs').addEventListener('click', bfs, false);
+  document.getElementById('btn-ids').addEventListener('click', ids, false);
   document.getElementById('btn-dijkstra').addEventListener('click', dijkstra, false);
   document.getElementById('btn-a-star').addEventListener('click', aStar, false);
 

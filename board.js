@@ -16,18 +16,16 @@ class Board {
 
     this.endReached = false;
   }
-
-  getCell(row, col) {
-    return this.board[row][col];
-  }
 }
 
-function drawBoard() {
-  // console.log('Drawing board...')
+Board.prototype.getCell = function (row, col) {
+  return this.board[row][col];
+}
 
+Board.prototype.draw = function() {
   for (let i = 0; i < world.board.rows; i++) {
     for (let j = 0; j < world.board.cols; j++) {
-      drawCell(world.board.getCell(i, j));
+      this.getCell(i, j).draw();
     }
   }
 }
